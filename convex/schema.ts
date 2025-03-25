@@ -20,7 +20,6 @@ export default defineSchema({
     userName: v.string(),
   }),
   crisis: defineTable({
-    id: v.number(),
     title: v.string(),
     description: v.optional(v.string()),
     location: v.string(),
@@ -28,7 +27,7 @@ export default defineSchema({
     status: v.string(),
     help: v.optional(v.string()),
     viewable: v.boolean(),
-  }).index("filter_severity", ["severity"]).index("filter_status", ["status"]).index("filter_viewable", ["viewable"]),
+  }).index("filter_severity", ["severity", "viewable"]).index("filter_status", ["status", "viewable"]).index("filter_viewable", ["viewable"]),
   tasks: defineTable({
     alert: v.boolean(),
     dangerLevel: v.string(),

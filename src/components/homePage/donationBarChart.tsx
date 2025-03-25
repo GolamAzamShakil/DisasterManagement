@@ -29,6 +29,8 @@ import {
   addPropertyValues,
   extractPropertyValues,
 } from "@/model/mergeExpenseData";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { useId, useState } from "react";
 
 ///const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL ?? "");
 
@@ -58,14 +60,19 @@ export function DonationBarChart() {
   let sortedDonationData: DataModel[] | undefined;
   let sortedExpenseData: DataModel[] | undefined;
   let finalData: ChartDataModel[] | undefined;
-  //let hartData : ChartDataModel[] | undefined
-  const year = 2025;
+  
+  const id = useId()
+  //let year = 2024;
+  const [year, setYear] = useState(parseInt("2024"))
+  const changeYear = (value: string) => {
+    setYear(parseInt(value))
+  }
 
   const word = () => {
-    if (year === 2025) {
-      return "this";
+    if (year === 2024) {
+      return "last";
     }
-    return "last";
+    return "this";
   };
 
   /* const data = await convex.query(api.donation.get);
@@ -89,12 +96,30 @@ export function DonationBarChart() {
   let extractExpenseAmount = extractPropertyValues(sortedExpenseData, "amount");
   finalData = addPropertyValues(sortedDonationData, extractExpenseAmount);
 
-  console.log(finalData);
-
   return (
     <Card className="">
       <CardHeader>
-        <CardTitle>Bar Chart - 2024</CardTitle>
+        <CardTitle>
+          <div className="flex flex-row justify-items-start items-center">
+            <p className="pr-3.5">Bar Chart - </p>
+            <Select defaultValue="2" onValueChange={(value: string) => {
+              if (value === "1") {
+                changeYear("2025")
+              }
+              else if ( value === "2"){
+                changeYear("2024")
+              }
+            }}>
+              <SelectTrigger id={id} className="bg-muted border-transparent shadow-none">
+                <SelectValue placeholder="Year" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">2025</SelectItem>
+                <SelectItem value="2">2024</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent className="">
         <ChartContainer config={chartConfig} className="min-h-[600px] w-full">
@@ -115,7 +140,7 @@ export function DonationBarChart() {
               axisLine={false}
               tickFormatter={(value) => value.slice(0, 5)}
             />
-            <YAxis type="number" domain={[0, 20000]} allowDataOverflow />
+            <YAxis type="number" domain={[6500, 25000]} allowDataOverflow />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}

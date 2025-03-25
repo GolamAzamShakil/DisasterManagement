@@ -17,7 +17,6 @@ export const  ReadData = query({
 
 export const CreateCrisisData = mutation({
   args: {
-    id: v.number(),
     title: v.string(),
     description: v.optional(v.string()),
     location: v.string(),
@@ -28,25 +27,25 @@ export const CreateCrisisData = mutation({
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("crisis", {
-      id: args.id,
       title: args.title,
       description: args.description,
       location: args.location,
       severity: args.severity,
-      status: args.severity,
+      status: args.status,
       help: args.help,
       viewable: args.viewable,
     });
   },
 });
 
-export const  GetCrisisData = query({
+export const  GetAllCrisisData = query({
     args: {
-      limit: v.optional(v.number()),
-    ascending: v.optional(v.boolean()),
+      /* limit: v.optional(v.number()),
+    ascending: v.optional(v.boolean()), */
     },
     handler: async(ctx, args) => {
-        return await ctx.db.query("crisis").collect();
+        const limit = 100
+        return await ctx.db.query("crisis").withIndex("filter_viewable", q => q.eq("viewable", false)).take(limit);
     },
 });
 
@@ -80,18 +79,29 @@ export const GetSevereCrisisData = query({
 const items = await ctx.db.query("items").collect();
     return items.sort((a, b) => b.score - a.score).slice(0, 10); */
 
+    export const UpdateViewableField = mutation({
+      args: {
+        _id: v.id("crisis"),
+        viewable: v.boolean(),
+      },
+      handler: async (ctx, args) => {
+        await ctx.db.patch(args._id, { viewable: args.viewable });
+      },
+    });
+
 export const FilterSevereCrisisData = query({
   args: {
     limit: v.optional(v.number()),
-    ascending: v.optional(v.boolean()),
+    //ascending: v.optional(v.boolean()),
   },
   handler: async(ctx, args) => {
-    const order = args.ascending ? "asc" : "desc";
+    //const order = args.ascending ? "asc" : "desc";
+    const order = "asc";
     const limit = args.limit ?? 10;
 
     const items = await ctx.db
       .query("crisis")
-      .withIndex("filter_severity")
+      .withIndex("filter_severity", q => q.eq("severity", "third").eq("viewable", true))
       .order(order)
       .take(limit);
 
@@ -102,15 +112,16 @@ export const FilterSevereCrisisData = query({
 export const FilterStatusCrisisData = query({
   args: {
     limit: v.optional(v.number()),
-    ascending: v.optional(v.boolean()),
+    //ascending: v.optional(v.boolean()),
   },
   handler: async(ctx, args) => {
-    const order = args.ascending ? "asc" : "desc";
+    //const order = args.ascending ? "asc" : "desc";
+    const order = "asc";
     const limit = args.limit ?? 10;
 
     const items = await ctx.db
       .query("crisis")
-      .withIndex("filter_status")
+      .withIndex("filter_status", q => q.eq("status", "").eq("viewable", true))
       .order(order)
       .take(limit);
 
@@ -121,18 +132,42 @@ export const FilterStatusCrisisData = query({
 export const FilterViewableCrisisData = query({
   args: {
     limit: v.optional(v.number()),
-    ascending: v.optional(v.boolean()),
+    //ascending: v.optional(v.string()),
   },
   handler: async(ctx, args) => {
-    const order = args.ascending ? "asc" : "desc";
+    const order = "asc";
     const limit = args.limit ?? 20;
 
     const items = await ctx.db
       .query("crisis")
-      .withIndex("filter_viewable")
+      .withIndex("filter_viewable", q => q.eq("viewable", true))
       .order(order)
       .take(limit);
 
     return items;
   }
 });
+
+export const FilterNotViewableCrisisData = query({
+  args: {
+    limit: v.optional(v.number()),
+    //ascending: v.optional(v.string()),
+  },
+  handler: async(ctx, args) => {
+    const order = "asc";
+    const limit = args.limit ?? 20;
+
+    const items = await ctx.db
+      .query("crisis")
+      .withIndex("filter_viewable", q => q.eq("viewable", false))
+      .order(order)
+      .take(limit);
+
+    return items;
+  }
+});
+
+/* const activeItems = await ctx.db
+  .query("myTable")
+  .filter(q => q.eq(q.field("isActive"), true))
+  .collect(); */

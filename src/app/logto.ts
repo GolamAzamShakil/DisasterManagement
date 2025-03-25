@@ -8,3 +8,4 @@ export const logtoConfig: LogtoNextConfig = {
   cookieSecret: 'IDontKnowWhatShouldIUseInThisField',
   cookieSecure: process.env.NODE_ENV === 'production',
 };
+

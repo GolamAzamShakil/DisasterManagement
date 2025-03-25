@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useId, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -31,13 +31,23 @@ import {
   extractPropertyValues,
 } from "@/model/mergeExpenseData";
 import { chartConfig } from "../homePage/donationBarChart";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+
+
+
 
 export const DonationChart = () => {
-  const year = 2025;
-
-  const donationData = useQuery(api.donation.FilterYearDonationData, { year });
-  const expenseData = useQuery(api.expense.FilterYearExpenseData, { year });
-
+  const idD = useId();
+  const [year, setYear] = useState(parseInt("2024"));
+  const changeYear = (value: string) => {
+    setYear(parseInt(value));
+  };
   const word = () => {
     if (year === 2025) {
       return "this";
@@ -45,10 +55,41 @@ export const DonationChart = () => {
     return "last";
   };
 
+  const donationData = useQuery(api.donation.FilterYearDonationData, { year });
+  const expenseData = useQuery(api.expense.FilterYearExpenseData, { year });
+
   return (
     <Card className="">
       <CardHeader>
-        <CardTitle>Bar Chart - 2024</CardTitle>
+        <CardTitle>
+          <div className="flex flex-row justify-items-start items-center">
+            <p className="pr-3.5">Bar Chart of donation - </p>
+            <Select
+              defaultValue="2"
+              onValueChange={(value: string) => {
+                if (value === "1") {
+                  changeYear("2025");
+                  console.log(value, year);
+                } else if (value === "2") {
+                  changeYear("2024");
+                  console.log(value, year);
+                }
+                console.log(value, year);
+              }}
+            >
+              <SelectTrigger
+                id={idD}
+                className="bg-muted border-transparent shadow-none"
+              >
+                <SelectValue placeholder="Year" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">2025</SelectItem>
+                <SelectItem value="2">2024</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </CardTitle>
       </CardHeader>
       <CardContent className="">
         <ChartContainer config={chartConfig} className="min-h-[600px] w-full">

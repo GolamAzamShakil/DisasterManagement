@@ -9,7 +9,7 @@ export default async function Home() {
     <>
       <section>
         <div className="flex flex-col items-center justify-center">
-          <ChartContainer title="Bar Chart of last year's donations and expenses">
+          <ChartContainer title="Bar Chart of all time donations and expenses">
             <DonationBarChart />
           </ChartContainer>
           <div className="pt-3">

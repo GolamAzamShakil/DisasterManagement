@@ -20,12 +20,12 @@ export const NavigationRoutes = [
         link: "/inventory",
     },
     {
-        label: "Dashboard",
-        link: "/admin",
+        label: "Profile",
+        link: "/profile",
     },
     {
-        label: "Settings",
-        link: "/profile",
+        label: "Dashboard",
+        link: "/dashboard",
     },
     /*{
         label: "",

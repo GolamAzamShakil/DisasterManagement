@@ -7,6 +7,7 @@ import ConvexClientProvider from "./(components)/ConvexClientComponent";
 import Header from "@/components/upperPart/Header";
 import { twMerge } from "tailwind-merge";
 import { ThemeProvider } from "@/components/theme/themeProvider";
+import { useRouter } from "next/navigation";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -24,6 +25,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //const router = useRouter()
+  //const isAccountRoute = router.
+
   return (
     //<AuthProvider>
     <html lang="en" suppressHydrationWarning>

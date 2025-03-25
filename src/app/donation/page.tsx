@@ -4,17 +4,20 @@ import ChartContainer from '@/components/homePage/chartContainer'
 import React from 'react'
 
 const Donation = () => {
+  //const context = React.createContext();
+  //function access() 
+  console.log()
   return (
     <section>
       <section>
         <div className="flex flex-col items-center justify-center">
           <div className="pt-5">
-            <ChartContainer title="Bar Chart of last year's donations">
+            <ChartContainer title="Bar Chart of donations">
               <DonationChart />
             </ChartContainer>
           </div>
           <div className="pt-10">
-            <ChartContainer title="Bar Chart of last year's expenses">
+            <ChartContainer title="Bar Chart of expenses">
               <ExpenseChart />
             </ChartContainer>
           </div>
