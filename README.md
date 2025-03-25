@@ -49,9 +49,9 @@ Start the server
 
 ## Screenshots
 
-![Home Page](https://ibb.co.com/xqC8gQk5)
-![Donatin Page](https://ibb.co.com/JFQdsXbc)
-![Crisis View Page](https://ibb.co.com/rRjjHMSH)
-![Crisis Manage](https://ibb.co.com/wFtMwTSK)
-![Volunteer Page](https://ibb.co.com/fPNzsFf)
+Home Page- https://ibb.co.com/xqC8gQk5
+Donatin Page- https://ibb.co.com/JFQdsXbc
+Crisis View Page- https://ibb.co.com/rRjjHMSH
+Crisis Manage= https://ibb.co.com/wFtMwTSK
+Volunteer Page- https://ibb.co.com/fPNzsFf
 
