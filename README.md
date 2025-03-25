@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Disaster Management
 
-## Getting Started
+A web application to view and manage natural disasters and occurences.
+## Tech Stack
 
-First, run the development server:
+**Client:** React, Nextjs, TailwindCSS
+
+**Server:** Nodejs
+
+**Database:**  Convexdb
+
+
+## Features
+
+- Real Time donation data with bar chart
+- Real Time expense data with bar chart
+- View and manage crises data
+- Search available volunteer
+- Registration and sign-in as volunteer
+- Look for inventories [..upcoming]
+
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/GolamAzamShakil/DisasterManagement.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd my-project
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Install dependencies
 
-## Learn More
+```bash
+  pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Start the server
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  pnpm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Screenshots
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Home Page](https://ibb.co.com/xqC8gQk5)
+![Donatin Page](https://ibb.co.com/JFQdsXbc)
+![Crisis View Page](https://ibb.co.com/rRjjHMSH)
+![Crisis Manage](https://ibb.co.com/wFtMwTSK)
+![Volunteer Page](https://ibb.co.com/fPNzsFf)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
